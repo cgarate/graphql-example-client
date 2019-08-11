@@ -12,6 +12,7 @@ class AddBook extends Component {
       authorId: ""
     };
     this.submitForm = this.submitForm.bind(this);
+    this._onChangeHandler = this._onChangeHandler.bind(this);
   }
 
   displayAuthors() {
@@ -41,8 +42,8 @@ class AddBook extends Component {
     });
   }
 
-  _onChangeHandler(event, key) {
-    this.setState({[key]: event.target.value})
+  _onChangeHandler(event) {
+    this.setState({[event.target.name]: event.target.value})
   }
 
   render() {
@@ -52,7 +53,8 @@ class AddBook extends Component {
           <label>Book name:</label>
           <input
             type="text"
-            onChange={this._onChangeHandler.bind(this, 'name')}
+            name="name"
+            onChange={this._onChangeHandler}
           />
         </div>
 
@@ -60,13 +62,14 @@ class AddBook extends Component {
           <label>Genre:</label>
           <input
             type="text"
-            onChange={this._onChangeHandler.bind(this, 'genre')}
+            name="genre"
+            onChange={this._onChangeHandler}
           />
         </div>
 
         <div className="field">
           <label>Author:</label>
-          <select onChange={this._onChangeHandler.bind(this, 'authorId')}>
+          <select onChange={this._onChangeHandler} name="authorId">
             <option>Select Author</option>
             {this.displayAuthors()}
           </select>
